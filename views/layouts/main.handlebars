@@ -5,16 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JMagic-Learner's Tech Blog</title>
-  <link rel="stylesheet" href="../../public/css/jass.css">
+  <link rel="stylesheet" href="/css/jass.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
   <header class="display-flex justify-space-between align-center p-2">
     <h1>
-      TECH BLOG 
+      TECH BLOG
     </h1>
 
-    <span> </span>
+
+
     <!-- TODO: Add a comment describing the functionality of this helper -->
     <!-- if passed through, via homeRoutes, adds a true -->
     {{#if logged_in}}
@@ -22,18 +23,30 @@
       <button class="btn" id="logout">logout</button>
     </nav>
     {{/if}}
+
   </header>
+
+
+  <div class="banner">
+    <h1> TECH BLOG </h1>
+    <p> There needs to be a bar above this line</p>
+  </div>
+
+
+
   <main class="container container-fluid mt-5">
     {{{ body }}}
   </main>
   <footer>
-      
+
   </footer>
 
   <!-- TODO: Add a comment describing the functionality of this helper -->
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
+
+
 </body>
 
 </html>

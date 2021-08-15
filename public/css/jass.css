@@ -33,6 +33,7 @@ main {
  * `article` contexts in Chrome, Firefox, and Safari.
  */
 h1 {
+  text-align: center;
   font-size: 2em;
   margin: 0.67em 0;
 }
@@ -1702,4 +1703,26 @@ form [type='radio'] {
   .align-content-center-xl {
     align-content: center;
   }
+}
+
+.banner {
+  color:#000000;
+  width:100%;
+  text-align: center;
+  margin:auto;
+  padding: 2px;
+  list-style:none;
+}
+
+.image1 {
+  width: 100%;
+  height: 70%;
+  align-items:center;
+  margin: auto;
+  
+}
+
+.homepage-image {
+  margin: auto;
+  align-content: center;
 }

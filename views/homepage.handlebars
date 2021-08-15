@@ -1,4 +1,20 @@
 {{#each users as |user| }}
+
+  <div class= "homepage-image">
+    <img class = "image1" src="/images/Vatican.jpg">
+  </div>
+
+  <div class= "banner">
+    <p> Welcome to TECH-BLOG, a website dedicated to providing tips and tricks to tech conundrums</p>
+    <ul>
+      <li> JAVASCRIPT </li>
+      <li> HTML </li>
+      <li> CSS </li>
+      <li> API </li>
+      <li> EXPRESS </li>
+    </ul>
+  </div>
+  
 <div class="row align-center mb-5">
   <div class="col-md-6">
     <h2> {{user.name}}</h2>
@@ -7,4 +23,7 @@
     <h3><a href="mailto:{{user.email}}">{{user.email}}</a></h3>
   </div>
 </div>
+
+
+
 {{/each}}
