@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const { response, request } = require('express');
 // Importing Model dependencies from the models folder
-const { Information , User} = require('../models');
+const { User } = require('../models/');
 // Importing a helper, auth, to help authenticate user credentials
 const withAuth = require('../utils/auth');
 
@@ -13,13 +13,38 @@ res.render('standby');
 
 
 router.get('/login', async (req,res) => {
-
-    if(req.session.logged_in) {
-        res.redirect('/profile');
-        return;
+if(req.session.logged_in) {
+    try {
+        const userData = await User.findByPk(req.session.user_id, {
+            attributes: {exclude: ['password']},
+        
+        });
+    
+        const user= userData.get({plain:true});
+    
+    
+        res.render('profile', {
+            
+            
+            name: user.name
+      
+        });
+      
+    
+    } catch (err) {
+        res.status(404).json(err);
     }
-console.log("The user has clicked the login button on the standbypage, we are redirecting the user to the login page");
-res.render('login');
+
+
+
+    res.render('profile,')
+
+
+    return;
+} else {
+    console.log("The user has clicked the login button on the standbypage, we are redirecting the user to the login page");
+    res.render('login');
+}
 });
 
 
@@ -32,31 +57,29 @@ res.render('login');
 
 router.post('/profile', async (req,res) => {
     console.log("The user has logged in via POST, redirecting to profile.handlebars");
-    if(res){
-    res.render('profile');
-    }
-    return response.ok = true;
+
+    res.redirect('/profile');
+  
 });
 
 
-router.get('/profile', async (req,res) => {
+router.get('/profile', withAuth, async (req,res) => {
     console.log("The user has logged in via GET, redirecting to profile.handlebars");
-/*
+
 try {
     const userData = await User.findByPk(req.session.user_id, {
-        include: [
-            {model:User,
-            attributes: ['name'],
-        },
-        ],
+        attributes: {exclude: ['password']},
+    
     });
 
-    const profile = profileData.get({plain:true});
+    const user= userData.get({plain:true});
+
 
     res.render('profile', {
-        ...profile,
-        logged_in: req.session.logged_in,
-        user_name: profile
+        
+        logged_in: true,
+        name: user.name,
+        email: user.email
     });
   
 
@@ -65,8 +88,8 @@ try {
 }
 
 
-*/
-res.render('profile');
-})
+
+//res.render('profile');
+});
 
 module.exports = router;
