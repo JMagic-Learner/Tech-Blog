@@ -7,14 +7,18 @@ const { User } = require('../models/');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req,res) => {
+
     console.log("The homepage has been requested");
 res.render('standby');
 });
 
 
 router.get('/login', async (req,res) => {
+    console.log(req.body);
 if(req.session.logged_in) {
-    res.render('profile');
+    res.render('profile' , {
+        test: 'Trying to pass values into profile'
+    });
     return;
 }
 
@@ -25,6 +29,7 @@ if(req.session.logged_in) {
 
 
 router.post('/login', async (req,res) => {
+console.log(req.body);
 console.log("The user has clicked the login button on the standbypage");
 response.ok = true;
 res.render('login');

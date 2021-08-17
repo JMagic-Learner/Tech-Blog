@@ -5,7 +5,8 @@ const { response, request } = require('express');
 
 
 router.post('/loggedin', async (req, res) => {
-  console.log("userRoutes /loggedin post route has been called");
+  console.log("userRoutes /loggedin post route has been called from login.js");
+  console.log(req.body);
   try {
     // TODO: Add a comment describing the functionality of this expression
     const userData = await User.findOne({ where: { email: req.body.email } });
@@ -37,6 +38,7 @@ router.post('/loggedin', async (req, res) => {
       
       res.json({ user: userData, message: 'You are now logged in!' });
       res.render('profile');
+   
     });
     
   
@@ -46,6 +48,7 @@ router.post('/loggedin', async (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
+  console.log(req.body);
   if (req.session.logged_in) {
     // TODO: Add a comment describing the functionality of this method
     req.session.destroy(() => {
