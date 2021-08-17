@@ -7,49 +7,25 @@ const { User } = require('../models/');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req,res) => {
-console.log("The homepage has been requested");
+    console.log("The homepage has been requested");
 res.render('standby');
 });
 
 
 router.get('/login', async (req,res) => {
 if(req.session.logged_in) {
-    try {
-        const userData = await User.findByPk(req.session.user_id, {
-            attributes: {exclude: ['password']},
-        
-        });
-    
-        const user= userData.get({plain:true});
-    
-    
-        res.render('profile', {
-            
-            
-            name: user.name
-      
-        });
-      
-    
-    } catch (err) {
-        res.status(404).json(err);
-    }
-
-
-
-    res.render('profile,')
-
-
+    res.render('profile');
     return;
-} else {
-    console.log("The user has clicked the login button on the standbypage, we are redirecting the user to the login page");
-    res.render('login');
 }
+
+    console.log("The user is not logged in, therefore we are being redirected to the standbypage");
+    res.render('login');
+
 });
 
 
-router.post('/homepage', async (req,res) => {
-console.log("The user has submitted a password and email");
+router.post('/login', async (req,res) => {
+console.log("The user has clicked the login button on the standbypage");
 response.ok = true;
 res.render('login');
 });

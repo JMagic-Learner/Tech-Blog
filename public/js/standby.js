@@ -1,5 +1,5 @@
 const login = async () => {
-    const response = await fetch('homepage', {
+    const response = await fetch('/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     });
