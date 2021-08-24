@@ -18,11 +18,17 @@
 
     <!-- TODO: Add a comment describing the functionality of this helper -->
     <!-- if passed through, via homeRoutes, adds a true -->
-    {{#if logged_in}}
     <nav>
+      <button class="btn"> <a href="/">Home</a></button>
+    
+     
+    {{#if logged_in}}
       <button class="btn" id="logout">logout</button>
-    </nav>
+    {{else}}
+     <button class="btn"> <a href="/login">login</a></button>
+     <button class="btn"> <a href="/signUp">Sign Up</a></button>
     {{/if}}
+    </nav>
 
   </header>
 

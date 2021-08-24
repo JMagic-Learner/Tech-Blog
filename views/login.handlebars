@@ -1,21 +1,34 @@
-<h2>Login</h2>
 
-  <div class= "homepage-image">
-    <img class = "image1" src="/images/Vatican.jpg">
+{{#if sign_up}}
+<h1>Sign Up</h1>
+{{else}}
+<h1>Log In</h1>
+{{/if}}
+
+
+
+ {{#if sign_up}}
+ <form class="form signup-form">
+   <div class="form-group">
+    <label for="name-signup">Username:</label>
+    <input class="form-input" type="text" id="name-signup" />
+  </div>
+  <div class="form-group">
+    <label for="email-signup">email:</label>
+    <input class="form-input" type="text" id="email-signup" />
+  </div>
+  <div class="form-group">
+    <label for="password-signup">password:</label>
+    <input class="form-input" type="password" id="password-signup" />
+  </div>
+<div class="form-group">
+    <button class="btn btn-primary" type="submit">sign_up</button>
   </div>
 
-  <div class= "banner">
-    <p> Welcome to TECH-BLOG, a website dedicated to providing tips and tricks to tech conundrums</p>
-    <ul>
-      <li> JAVASCRIPT </li>
-      <li> HTML </li>
-      <li> CSS </li>
-      <li> API </li>
-      <li> EXPRESS </li>
-    </ul>
-  </div>
+</form>
 
-<form class="form login-form">
+ {{else}}
+ <form class="form login-form">
   <div class="form-group">
     <label for="email-login">email:</label>
     <input class="form-input" type="text" id="email-login" />
@@ -24,14 +37,10 @@
     <label for="password-login">password:</label>
     <input class="form-input" type="password" id="password-login" />
   </div>
-  <div class="form-group">
+<div class="form-group">
     <button class="btn btn-primary" type="submit">login</button>
   </div>
+
 </form>
-
-
-<div> 
-  <button class="btn btn-primary" type="submit" id="SubmitUser"> Sign up </button>
-</div>
-
+{{/if}}
 <script src="/js/login.js"></script>

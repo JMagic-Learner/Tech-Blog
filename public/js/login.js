@@ -1,4 +1,16 @@
 
+/*
+const sequelize = require('../..config/connection');
+const db = mysql.createConnection(
+  {
+host: 'localhost',
+      user: 'root',
+      password: 'Vertex213!',
+      database: 'scpfoundation_db'
+  },
+  console.log("Connected to the SCP Mainframe")
+);
+*/
 
 const loginFormHandler = async (event) => {
   event.preventDefault();
@@ -14,7 +26,7 @@ const loginFormHandler = async (event) => {
       body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
-
+    
     if (response.ok) {
       // If successful, redirect the browser to the profile page
       console.log('If successful, redirect the browser to the profile page');
@@ -23,6 +35,7 @@ const loginFormHandler = async (event) => {
     } else {
       alert(response.statusText);
     }
+
   }
 };
 
@@ -32,16 +45,19 @@ const signupFormHandler = async (event) => {
   const name = document.querySelector('#name-signup').value.trim();
   const email = document.querySelector('#email-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
-
+  console.log(name);
+  console.log(email);
+  console.log(password);
+  
   if (name && email && password) {
-    const response = await fetch('/api/users/login', {
+    const response = await fetch('/api/users/loggedin', {
       method: 'POST',
       body: JSON.stringify({ name, email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      document.location.replace('/login');
     } else {
       alert(response.statusText);
     }

@@ -13,10 +13,15 @@
       <li> EXPRESS </li>
     </ul>
   </div>
-
-
+{{textExample}}
+{{#each blogpostsData as |blogpost|}}
+<div>
+  <h2>
+    Title 1
+  </h2>
+  <p>
+    Description 1
+  </p>
 </div>
-      <button class="btn" id="login"> Login</button>
-</div>
+{{/each}}
 
-<script src="/js/standby.js"></script>

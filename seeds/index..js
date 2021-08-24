@@ -1,6 +1,8 @@
 
-const { User } = require('../models');
-const userData = require('./userData');
+const { User , blogposts } = require('../models');
+const sequelize = require('../config/connection');
+const userData = require('./userData.js');
+const seedBlogPosts = require('./blogpost.js');
 
 
 const seedDatabase = async () => {
@@ -12,8 +14,11 @@ const seedDatabase = async () => {
     returning: true,
   });
 
+  await seedBlogPosts();
+
   console.log(userData);
   process.exit(0);
 };
+
 
 module.exports = seedDatabase();

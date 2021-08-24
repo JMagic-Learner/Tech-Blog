@@ -1,4 +1,12 @@
 const User = require('./User');
-const Information = require('./information');
+const blogposts = require('./blogposts');
 
-module.exports = { User };
+User.hasMany(blogposts, {
+    foriegnKey: 'blogpost_id'
+});
+
+blogposts.belongsTo(User, {
+    foriegnKey:'blogpost_id'
+})
+
+module.exports = { User , blogposts};
