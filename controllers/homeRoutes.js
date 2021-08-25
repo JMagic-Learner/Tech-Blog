@@ -6,15 +6,36 @@ const { User, blogposts } = require('../models/');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req,res) => {
+    try {
+        const blogData = await blogposts.findAll({
+            include: [
+                {model:User,
+                attributes: ['name'],
+            },
+            ],
+        });
+    const blogs = blogData.map((blogpost) => blogpost.get({plain:true}));
+    res.render('homepage', {
+        blogs,
+        logged_in:req.session.logged_in
+    });
+} catch (err) {
+    res.status(500).json(err);
+}
+});
+
+router.get('/profile', async (req,res) => {
 
     try {
-        const blogpostEntry = await blogposts.findAll({
-            include:[{ model: User}]
+        const userData = await User.findByPk(req.session.user_id, {
+            attributes: {exclude: ['password']},
+            include: [{model: blogposts}],
         });
-        const blogpostsData = blogpostEntry.map((blogposts) => blogposts.get({ plain:true}));
+        const user = userData.get({ plain:true});
 
         res.render('standby', {
-            blogpostsData,
+            ...user,
+            logged_in:true,
             textExample: "Hello, this proves something is being passed through",
         });
     } catch (err) {
@@ -29,10 +50,8 @@ router.get('/login', async (req,res) => {
 
 if(req.session.logged_in) {
     console.log("The user is logged in. We are loading into the profile page");
-    res.render('profile' , {
-        logged_in: true,
-        test: 'Trying to pass values into profile'
-    });
+    res.redirect('/profile');
+    
     return;
 }
 
@@ -58,13 +77,5 @@ router.post('/profile', async (req,res) => {
 });
 
 
-router.get('/profile', withAuth, async (req,res) => {
-    console.log("The user has logged in via GET, redirecting to profile.handlebars");
-
-res.render('profile', {
-    logged_in:true,
-    test: "You just logged in via router.get(/profile)"
-});
-});
 
 module.exports = router;
